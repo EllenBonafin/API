@@ -1,14 +1,29 @@
 import express from 'express'
 import {config} from 'dotenv'
+import { GetUserControler } from './controllers/get-users/get-users'
+import { MongoGetUsersRepositor } from './repositoires/get-users/mongo-get-users'
+import { MongoClient } from './database/mongo'
 
-config()
-const app = express()
-const port = process.env.PORT
+const main = async () => {
+    config();
+    const app = express();
 
-app.get('/', (req, res) =>{
-    res.send('HELLO WORD');
-})
+    await MongoClient.connect() 
+    
+    app.get("/users", async (req, res) => {
+    const mongoGetUsersRepositor = new MongoGetUsersRepositor();
+    const getUserControler = new GetUserControler(mongoGetUsersRepositor);
 
-app.listen(port, () => console.log(`Hello!Port:${port}`))
+    const { body, statusCode } = await getUserControler.handle();
+
+    res.send(body).status(statusCode);
+    });
+
+    const port = process.env.PORT;
+    app.listen(port, () => console.log(`Hello!Port:${port}`));
+}
+
+main()
+
 
 
