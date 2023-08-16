@@ -1,0 +1,7 @@
+    ENDPOINT       CONTROLER       REPOSITOR       REPOSITOR      BANCO 
+    -----------    -----------     =========      -----------      +++++
+    get/users                                                     MONGO
+    -----------    ------------    =========      -----------     +++++
+                  >>Classe que     >>Interfac     >>conversa 
+                  valida a requi   interna        com o banco
+                  sição
