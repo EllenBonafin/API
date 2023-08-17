@@ -1,3 +1,4 @@
+// core ou entidade da aplicação inteira
 export interface User {
     id: string;
     firstName: string;
